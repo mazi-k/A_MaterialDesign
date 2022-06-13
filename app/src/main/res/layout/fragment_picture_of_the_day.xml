@@ -4,8 +4,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/blue_gray_50">
+    android:orientation="vertical">
 
     <com.example.a_materialdesign.utils.EquilateralImageView
         android:id="@+id/image_view"

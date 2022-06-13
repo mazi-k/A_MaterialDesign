@@ -1,5 +1,6 @@
 package com.example.a_materialdesign.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.a_materialdesign.BuildConfig
@@ -20,6 +21,11 @@ class PictureOfTheDayViewModel(
         retrofitImpl.getRetrofitImpl().getPictureOfTheDay(BuildConfig.NASA_API_KEY).enqueue(callback)
     }
 
+    fun sendServerRequestTemp(date: String) {
+        liveDataForViewToObserve.postValue(AppState.Loading(null))
+        retrofitImpl.getRetrofitImpl().getPictureOfTheDayTemp(BuildConfig.NASA_API_KEY, date).enqueue(callback)
+    }
+
     private val callback = object : Callback<PictureOfTheDayServerResponseData>{
         override fun onResponse(
             call: Call<PictureOfTheDayServerResponseData>,
@@ -29,13 +35,13 @@ class PictureOfTheDayViewModel(
                 response.body()?.let {
                     liveDataForViewToObserve.postValue(AppState.Success(it))
                 }
-            }else{
-                //TODO HW
+            } else {
+                Log.e("@@@", "response failed")
             }
         }
 
         override fun onFailure(call: Call<PictureOfTheDayServerResponseData>, t: Throwable) {
-            //TODO HW
+            Log.e("@@@", "response failed" + t.localizedMessage)
         }
 
     }

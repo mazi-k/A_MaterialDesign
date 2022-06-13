@@ -6,4 +6,5 @@
     <dimen name="bottom_sheet_line_width">25dp</dimen>
     <dimen name="bottom_sheet_line_height">2dp</dimen>
     <dimen name="bottom_sheet_corners_radius">40dp</dimen>
+    <dimen name="button_corner_radius">20dp</dimen>
 </resources>

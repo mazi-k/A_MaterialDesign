@@ -16,10 +16,12 @@
         <item name="textInputStyle">@style/MyInputStyle</item>
         <item name="floatingActionButtonStyle">@style/MyFloatingButtonStyle</item>
         <item name="bottomAppBarStyle">@style/MyBottomAppBarStyle</item>
+        <item name="chipStyle">@style/MyChipStyle</item>
     </style>
 
     <style name="MyButtonStyle" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/blue_gray_600</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
     </style>
 
     <style name="MyInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -33,6 +35,10 @@
 
     <style name="MyBottomAppBarStyle" parent="Widget.MaterialComponents.BottomAppBar">
         <item name="backgroundTint">@color/blue_gray_600</item>
+    </style>
+
+    <style name="MyChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+
     </style>
 
 </resources>

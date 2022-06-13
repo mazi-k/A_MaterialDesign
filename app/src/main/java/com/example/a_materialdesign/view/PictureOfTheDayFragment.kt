@@ -4,10 +4,13 @@ import BottomNavigationDrawerFragment
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.DatePicker
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
@@ -20,10 +23,15 @@ import com.example.a_materialdesign.viewmodel.AppState
 import com.example.a_materialdesign.viewmodel.PictureOfTheDayViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import java.text.DateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class PictureOfTheDayFragment : Fragment() {
 
     private var isMain = true
+    private var result: Int = 0
 
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding: FragmentPictureOfTheDayBinding
@@ -35,6 +43,11 @@ class PictureOfTheDayFragment : Fragment() {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        result = requireArguments().getInt("dayResult")
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +56,7 @@ class PictureOfTheDayFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
@@ -52,7 +66,13 @@ class PictureOfTheDayFragment : Fragment() {
         viewModel.getLiveDataForViewToObserve().observe(viewLifecycleOwner) {
             renderData(it)
         }
-        viewModel.sendServerRequest()
+
+        val newDate = LocalDate.now().minusDays(result.toLong())
+
+        when (result) {
+            0 -> viewModel.sendServerRequest()
+            1, 2 -> viewModel.sendServerRequestTemp(newDate.toString())
+        }
 
         wikiSearch()
         fabSwitch()
@@ -91,7 +111,6 @@ class PictureOfTheDayFragment : Fragment() {
         })
     }
 
-    @SuppressLint("ResourceAsColor")
     private fun wikiSearch() {
         binding.inputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
@@ -109,14 +128,17 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.app_bar_fav -> Toast.makeText(context, "Favourite", Toast.LENGTH_SHORT).show()
-            R.id.app_bar_settings -> Toast.makeText(context, "Settings", Toast.LENGTH_SHORT).show()
+            R.id.app_bar_settings -> requireActivity().supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container,SettingsFragment.newInstance())
+                .addToBackStack(null)
+                .commit()
             android.R.id.home -> {
                 BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager, "")
             }
         }
         return super.onOptionsItemSelected(item)
     }
-
 
     private fun renderData(appState: AppState) {
         when (appState) {
@@ -161,7 +183,12 @@ class PictureOfTheDayFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() =
-            PictureOfTheDayFragment()
+        fun newInstance(dayResult: Int): PictureOfTheDayFragment {
+            val pictureOfTheDayFragment = PictureOfTheDayFragment()
+            val bundle = Bundle()
+            bundle.putInt("dayResult", dayResult)
+            pictureOfTheDayFragment.arguments = bundle
+            return pictureOfTheDayFragment
+        }
     }
 }
