@@ -11,6 +11,7 @@
         <item name="colorOnSecondary">?attr/superColorOnSecondary</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?superColorPrimary</item>
+        <item name="textAppearanceBody2">@style/MyTextAppearance</item>
 
         <!-- Customize your theme here. -->
         <item name="materialButtonStyle">@style/MyButtonStyle</item>
