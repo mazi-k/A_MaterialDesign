@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Фото дня</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="photo_of_the_day_stub">Фото дня</string>
+    <string name="search_wiki">Найти в Википедии</string>
+    <string name="wiki_helper_text">Поищите термин в википедии</string>
+    <string name="favourite">Избранное</string>
+    <string name="settings">Настройки</string>
+    <string name="search">Поиск</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Пустой фрагмент</string>
+    <string name="today">сегодня</string>
+    <string name="yesterday">вчера</string>
+    <string name="_2_days_ago">2 дня назад</string>
+    <string name="apply">Применить</string>
+</resources>

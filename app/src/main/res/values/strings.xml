@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">A_MaterialDesign</string>
+    <string name="app_name">Photo of the day</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="photo_of_the_day_stub">Photo of the day</string>
+    <string name="search_wiki">Search on Wikipedia</string>
+    <string name="wiki_helper_text">Search this term on Wikipedia</string>
+    <string name="favourite">Favourite</string>
+    <string name="settings">Settings</string>
+    <string name="search">Search</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="today">today</string>
+    <string name="yesterday">yesterday</string>
+    <string name="_2_days_ago">2 days ago</string>
+    <string name="apply">apply</string>
 </resources>
