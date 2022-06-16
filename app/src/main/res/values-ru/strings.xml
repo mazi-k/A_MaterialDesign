@@ -14,4 +14,10 @@
     <string name="yesterday">вчера</string>
     <string name="_2_days_ago">2 дня назад</string>
     <string name="apply">Применить</string>
+    <string name="switch_theme">Выбор темы</string>
+    <string name="gray">Серая</string>
+    <string name="blue">Голубая</string>
+    <string name="purple">Фиолетовая</string>
+    <string name="orange">Оранжевая</string>
+    <string name="choose_a_day">Выбор дня</string>
 </resources>

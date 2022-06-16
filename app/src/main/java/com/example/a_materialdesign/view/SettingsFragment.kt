@@ -38,15 +38,39 @@ class SettingsFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        applyButton()
+        switchTheme()
+    }
 
-        binding.applyButton.setOnClickListener {
-            var result = 2
-            binding.chipGroup.setOnCheckedStateChangeListener { chip, isChecked ->
-                when (chip.checkedChipId){
-                    //TODO: how does it work??????
-                }
-            }
-            controller!!.saveResult(result)
+    private fun switchTheme() {
+        binding.grayThemeRadioButton.setOnClickListener {
+            controller!!.setAppTheme(1)
+        }
+
+        binding.blueThemeRadioButton.setOnClickListener {
+            controller!!.setAppTheme(2)
+        }
+
+        binding.purpleThemeRadioButton.setOnClickListener {
+            controller!!.setAppTheme(3)
+        }
+
+        binding.orangeThemeRadioButton.setOnClickListener {
+            controller!!.setAppTheme(4)
+        }
+    }
+
+    fun applyButton(){
+        binding.chipToday.setOnClickListener {
+            controller!!.saveResult(0)
+        }
+
+        binding.chipYesterday.setOnClickListener {
+            controller!!.saveResult(1)
+        }
+
+        binding.chipTwoDaysAgo.setOnClickListener {
+            controller!!.saveResult(2)
         }
     }
 
@@ -63,5 +87,6 @@ class SettingsFragment: Fragment() {
 
     interface Controller {
         fun saveResult(result: Int)
+        fun setAppTheme(theme: Int)
     }
 }

@@ -23,7 +23,10 @@
     <color name="blue_900">#2e5a9c</color>
 
     <color name="pink">#EC407A</color>
+    <color name="pink_200">#FFAFDF</color>
     <color name="deep_purple">#673AB7</color>
-    <color name="indigo">#283593</color>
+    <color name="purple">#BEA1F1</color>
+    <color name="orange_700">#EC7323</color>
+    <color name="orange_200">#FFFACE96</color>
 
 </resources>

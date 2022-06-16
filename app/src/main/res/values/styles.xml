@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">?colorPrimary</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:textColor">?colorOnSecondary</item>
+    </style>
+
+    <style name="MyInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">?colorPrimary</item>
+        <item name="android:textColorHint">@color/blue_gray_900</item>
+    </style>
+
+    <style name="MyFloatingButtonStyle" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="android:backgroundTint">?colorSecondary</item>
+    </style>
+
+    <style name="MyBottomAppBarStyle" parent="Widget.MaterialComponents.BottomAppBar">
+        <item name="backgroundTint">?colorPrimary</item>
+        <item name="rippleColor">?colorOnPrimary</item>
+    </style>
+
+    <style name="MyChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+
+    </style>
+
+</resources>
