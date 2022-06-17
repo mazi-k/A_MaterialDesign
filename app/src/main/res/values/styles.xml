@@ -21,10 +21,20 @@
     </style>
 
     <style name="MyChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
-
+        <item name="shapeAppearanceOverlay">@style/MyChipShapeAppearance</item>
     </style>
 
-    <style name="MyTextAppearance" parent="TextAppearance.AppCompat.Body2">
+    <style name="MyShapeAppearanceSmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">0%</item>
+    </style>
+
+    <style name="MyChipShapeAppearance" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">70%</item>
+    </style>
+
+    <style name="MyTextAppearanceBody2" parent="TextAppearance.AppCompat.Body2">
         <item name="fontFamily">@font/new_font</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">bold</item>
