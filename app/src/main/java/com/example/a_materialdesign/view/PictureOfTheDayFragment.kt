@@ -1,32 +1,25 @@
 package com.example.a_materialdesign.view
 
 import BottomNavigationDrawerFragment
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.DatePicker
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.a_materialdesign.R
 import com.example.a_materialdesign.databinding.FragmentPictureOfTheDayBinding
+import com.example.a_materialdesign.view.api.ApiActivity
 import com.example.a_materialdesign.viewmodel.AppState
 import com.example.a_materialdesign.viewmodel.PictureOfTheDayViewModel
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import java.text.DateFormat
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 class PictureOfTheDayFragment : Fragment() {
 
@@ -61,8 +54,6 @@ class PictureOfTheDayFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
 
-        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.bottomAppBar)
-
         viewModel.getLiveDataForViewToObserve().observe(viewLifecycleOwner) {
             renderData(it)
         }
@@ -75,11 +66,7 @@ class PictureOfTheDayFragment : Fragment() {
         }
 
         wikiSearch()
-        fabSwitch()
-
-        binding.imageView.setOnClickListener {
-            bottomSheetBehavior()
-        }
+        bottomSheetBehavior()
 
         binding.lifeHack.bottomSheetLine.setOnClickListener {
             bottomSheetBehavior()
@@ -130,9 +117,12 @@ class PictureOfTheDayFragment : Fragment() {
             R.id.app_bar_fav -> Toast.makeText(context, "Favourite", Toast.LENGTH_SHORT).show()
             R.id.app_bar_settings -> requireActivity().supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.container,SettingsFragment.newInstance())
+                .replace(R.id.container, SettingsFragment.newInstance())
                 .addToBackStack(null)
                 .commit()
+            R.id.app_bar_telescope -> {
+                startActivity(Intent(requireContext(), ApiActivity::class.java))
+            }
             android.R.id.home -> {
                 BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager, "")
             }
@@ -154,24 +144,6 @@ class PictureOfTheDayFragment : Fragment() {
                 binding.imageView.load(appState.serverResponseData.url) {
                     // TODO placehilde+error+transform
                 }
-            }
-        }
-    }
-
-    private fun fabSwitch() {
-        binding.fab.setOnClickListener {
-            isMain = !isMain
-            if (!isMain) {
-                binding.bottomAppBar.navigationIcon = null
-                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                binding.fab.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_back_fab))
-                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other)
-            } else {
-                binding.bottomAppBar.navigationIcon =
-                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_hamburger_menu_bottom_bar)
-                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                binding.fab.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_plus_fab))
-                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
             }
         }
     }

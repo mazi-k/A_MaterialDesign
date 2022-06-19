@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.a_materialdesign.databinding.SettingsFragmentBinding
-import java.lang.IllegalStateException
 
 class SettingsFragment: Fragment() {
 
@@ -38,7 +37,7 @@ class SettingsFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        applyButton()
+        applyChipChoice()
         switchTheme()
     }
 
@@ -60,7 +59,7 @@ class SettingsFragment: Fragment() {
         }
     }
 
-    fun applyButton(){
+    private fun applyChipChoice(){
         binding.chipToday.setOnClickListener {
             controller!!.saveResult(0)
         }

@@ -2,8 +2,8 @@ package com.example.a_materialdesign.view
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.a_materialdesign.R
 import com.example.a_materialdesign.utils.Parameters
 
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity(), SettingsFragment.Controller {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-        if (mSettings.contains(APP_PREFERENCES_THEME)){
+        if (mSettings.contains(APP_PREFERENCES_THEME)) {
             setAppTheme(mSettings.getInt(APP_PREFERENCES_THEME, 1))
         } else {
             setTheme(Parameters.getInstance().grayTheme)

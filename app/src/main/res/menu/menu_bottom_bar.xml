@@ -14,4 +14,10 @@
         android:title="@string/settings"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/app_bar_telescope"
+        android:icon="@drawable/ic_telescope"
+        android:title="@string/solar_system"
+        app:showAsAction="ifRoom" />
+
 </menu>
