@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
-            <solid android:color="@color/blue_gray_200"/>
+            <solid android:color="?superColorSecondary"/>
             <corners android:bottomRightRadius="0dp"
                 android:bottomLeftRadius="0dp"
                 android:topLeftRadius="@dimen/bottom_sheet_corners_radius"
