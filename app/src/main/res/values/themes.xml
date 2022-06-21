@@ -20,6 +20,7 @@
         <item name="textAppearanceBody2">@style/MyTextAppearanceBody2</item>
         <item name="chipStyle">@style/MyChipStyle</item>
         <item name="shapeAppearanceSmallComponent">@style/MyShapeAppearanceSmallComponent</item>
+<!--        <item name="navigationViewStyle">@style/MyBottomNavigationStyle</item>-->
     </style>
 
     <style name="MyGrayTheme" parent="MyBaseTheme">

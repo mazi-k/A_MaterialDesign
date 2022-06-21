@@ -107,28 +107,28 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_bottom_bar, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.app_bar_fav -> Toast.makeText(context, "Favourite", Toast.LENGTH_SHORT).show()
-            R.id.app_bar_settings -> requireActivity().supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, SettingsFragment.newInstance())
-                .addToBackStack(null)
-                .commit()
-            R.id.app_bar_telescope -> {
-                startActivity(Intent(requireContext(), ApiActivity::class.java))
-            }
-            android.R.id.home -> {
-                BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager, "")
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        super.onCreateOptionsMenu(menu, inflater)
+//        inflater.inflate(R.menu.menu_bottom_bar, menu)
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            R.id.app_bar_fav -> Toast.makeText(context, "Favourite", Toast.LENGTH_SHORT).show()
+//            R.id.app_bar_settings -> requireActivity().supportFragmentManager
+//                .beginTransaction()
+//                .replace(R.id.container, SettingsFragment.newInstance())
+//                .addToBackStack(null)
+//                .commit()
+//            R.id.app_bar_telescope -> {
+//                startActivity(Intent(requireContext(), ApiActivity::class.java))
+//            }
+//            android.R.id.home -> {
+//                BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager, "")
+//            }
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
     private fun renderData(appState: AppState) {
         when (appState) {
