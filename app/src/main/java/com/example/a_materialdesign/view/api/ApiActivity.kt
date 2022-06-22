@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.a_materialdesign.R
 import com.example.a_materialdesign.databinding.ActivityApiBinding
+import com.example.a_materialdesign.utils.ZoomOutPageTransformer
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -19,6 +20,7 @@ class ApiActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.viewPager.adapter = ViewPagerAdapter(this)
+        binding.viewPager.setPageTransformer(ZoomOutPageTransformer())
 
         tabLayoutInit()
         switch()
