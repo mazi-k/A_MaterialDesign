@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="MyBaseTheme" parent="Theme.MaterialComponents.DayNight">
+    <style name="MyBaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">?superColorPrimary</item>
         <item name="colorPrimaryVariant">?attr/superColorPrimaryVariant</item>
@@ -20,7 +20,7 @@
         <item name="textAppearanceBody2">@style/MyTextAppearanceBody2</item>
         <item name="chipStyle">@style/MyChipStyle</item>
         <item name="shapeAppearanceSmallComponent">@style/MyShapeAppearanceSmallComponent</item>
-<!--        <item name="navigationViewStyle">@style/MyBottomNavigationStyle</item>-->
+        <item name="bottomNavigationStyle">@style/MyBottomNavigationStyle</item>
     </style>
 
     <style name="MyGrayTheme" parent="MyBaseTheme">
