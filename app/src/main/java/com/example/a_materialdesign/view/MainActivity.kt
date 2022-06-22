@@ -68,12 +68,12 @@ class MainActivity : AppCompatActivity(), SettingsFragment.Controller {
             when (it.itemId) {
                 R.id.action_bottom_view_home -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, PictureOfTheDayFragment()).commit()
+                        .replace(R.id.container, PictureOfTheDayFragment.newInstance(0)).commit()
                     true
                 }
                 R.id.action_bottom_view_settings -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, SettingsFragment()).commit()
+                        .replace(R.id.container, SettingsFragment.newInstance()).commit()
                     true
                 }
                 R.id.action_bottom_view_telescope -> {
