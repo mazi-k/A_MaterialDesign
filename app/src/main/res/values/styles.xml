@@ -2,7 +2,12 @@
 <resources>
 
     <style name="MyBottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    </style>
 
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorPrimary">?superColorPrimary</item>
+        <item name="colorOnPrimary">?superColorOnPrimary</item>
     </style>
 
     <style name="MyButtonStyle" parent="Widget.MaterialComponents.Button">
