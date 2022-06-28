@@ -1,27 +1,37 @@
 package com.example.a_materialdesign.view
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.a_materialdesign.R
+import com.example.a_materialdesign.databinding.ActivityMainBinding
 import com.example.a_materialdesign.utils.Parameters
+import com.example.a_materialdesign.view.api.ApiActivity
 
 class MainActivity : AppCompatActivity(), SettingsFragment.Controller {
 
     val APP_PREFERENCES = "mysettings"
     val APP_PREFERENCES_THEME = "theme"
     lateinit var mSettings: SharedPreferences
+    lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-        if (mSettings.contains(APP_PREFERENCES_THEME)){
+        if (mSettings.contains(APP_PREFERENCES_THEME)) {
             setAppTheme(mSettings.getInt(APP_PREFERENCES_THEME, 1))
         } else {
             setTheme(Parameters.getInstance().grayTheme)
         }
-        setContentView(R.layout.activity_main)
+
+        setContentView(binding.root)
+        init()
+        setupNavigation()
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, PictureOfTheDayFragment.newInstance(0)).commit()
@@ -47,5 +57,33 @@ class MainActivity : AppCompatActivity(), SettingsFragment.Controller {
         val editor: SharedPreferences.Editor = mSettings.edit()
         editor.putInt(APP_PREFERENCES_THEME, theme)
         editor.apply()
+    }
+
+    private fun setupNavigation() {
+        binding.bottomNavigationView.selectedItemId = R.id.action_bottom_view_home
+    }
+
+    private fun init() {
+        binding.bottomNavigationView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.action_bottom_view_home -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, PictureOfTheDayFragment.newInstance(0)).commit()
+                    true
+                }
+                R.id.action_bottom_view_settings -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, SettingsFragment.newInstance()).commit()
+                    true
+                }
+                R.id.action_bottom_view_telescope -> {
+                    startActivity(Intent(this, ApiActivity::class.java))
+                    true
+                }
+                else -> {
+                    true
+                }
+            }
+        }
     }
 }
