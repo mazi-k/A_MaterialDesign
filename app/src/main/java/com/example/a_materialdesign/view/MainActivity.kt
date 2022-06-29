@@ -9,6 +9,7 @@ import com.example.a_materialdesign.R
 import com.example.a_materialdesign.databinding.ActivityMainBinding
 import com.example.a_materialdesign.utils.Parameters
 import com.example.a_materialdesign.view.api.ApiActivity
+import com.example.a_materialdesign.view.settings.SettingsFragment
 
 class MainActivity : AppCompatActivity(), SettingsFragment.Controller {
 
