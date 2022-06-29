@@ -20,4 +20,10 @@
     <string name="purple">Фиолетовая</string>
     <string name="orange">Оранжевая</string>
     <string name="choose_a_day">Выбор дня</string>
+    <string name="solar_system">Солнечная система</string>
+    <string name="earth">Земля</string>
+    <string name="mars">Марс</string>
+    <string name="system">Система</string>
+    <string name="telescope">Телескоп</string>
+    <string name="home">Дом</string>
 </resources>
