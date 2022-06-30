@@ -1,13 +1,11 @@
 package com.example.a_materialdesign.view
 
-import BottomNavigationDrawerFragment
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
@@ -15,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.a_materialdesign.R
 import com.example.a_materialdesign.databinding.FragmentPictureOfTheDayBinding
-import com.example.a_materialdesign.view.api.ApiActivity
 import com.example.a_materialdesign.viewmodel.AppState
 import com.example.a_materialdesign.viewmodel.PictureOfTheDayViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior

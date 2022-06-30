@@ -1,14 +1,13 @@
 package com.example.a_materialdesign.view
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.a_materialdesign.R
 import com.example.a_materialdesign.databinding.ActivityMainBinding
 import com.example.a_materialdesign.utils.Parameters
-import com.example.a_materialdesign.view.api.ApiActivity
+import com.example.a_materialdesign.view.api.ApiFragment
 import com.example.a_materialdesign.view.settings.SettingsFragment
 
 class MainActivity : AppCompatActivity(), SettingsFragment.Controller {
@@ -78,7 +77,9 @@ class MainActivity : AppCompatActivity(), SettingsFragment.Controller {
                     true
                 }
                 R.id.action_bottom_view_telescope -> {
-                    startActivity(Intent(this, ApiActivity::class.java))
+                    //startActivity(Intent(this, ApiActivity::class.java))
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, ApiFragment.newInstance()).commit()
                     true
                 }
                 else -> {
