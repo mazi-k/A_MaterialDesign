@@ -2,28 +2,41 @@ package com.example.a_materialdesign.view.api
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.a_materialdesign.R
-import com.example.a_materialdesign.databinding.ActivityApiBinding
-import com.example.a_materialdesign.utils.ZoomOutPageTransformer
+import com.example.a_materialdesign.databinding.FragmentApiBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class ApiActivity : AppCompatActivity() {
+class ApiFragment : Fragment() {
+    private var _binding: FragmentApiBinding? = null
+    private val binding: FragmentApiBinding
+        get() {
+            return _binding!!
+        }
 
-    lateinit var binding: ActivityApiBinding
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentApiBinding.inflate(inflater, container, false)
+        binding.viewPager.adapter = ViewPagerAdapter(this.requireActivity())
+        return binding.root
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        binding = ActivityApiBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        binding.viewPager.adapter = ViewPagerAdapter(this)
-        binding.viewPager.setPageTransformer(ZoomOutPageTransformer())
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         tabLayoutInit()
         switch()
+    }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
     }
 
     private fun tabLayoutInit() {
@@ -82,5 +95,9 @@ class ApiActivity : AppCompatActivity() {
         const val MARS_FRAGMENT = 1
         const val SYSTEM_FRAGMENT = 2
         var position = 0
+
+        @JvmStatic
+        fun newInstance() =
+            ApiFragment()
     }
 }
