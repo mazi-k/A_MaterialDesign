@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.a_materialdesign.R
 import com.example.a_materialdesign.databinding.SettingsFragmentBinding
-import com.example.a_materialdesign.view.PictureOfTheDayFragment
 
 class SettingsFragment: Fragment() {
 

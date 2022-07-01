@@ -11,7 +11,7 @@ import com.example.a_materialdesign.databinding.FragmentSystemBinding
 
 class SystemFragment : Fragment() {
 
-    val duration = 1000L
+    private val duration = 1000L
     private var isAnimate = false
 
     private var _binding: FragmentSystemBinding? = null
@@ -58,7 +58,6 @@ class SystemFragment : Fragment() {
                         }
                     })
             }
-
 
         }
 

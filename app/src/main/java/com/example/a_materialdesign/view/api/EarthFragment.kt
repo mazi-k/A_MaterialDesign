@@ -10,7 +10,7 @@ import com.example.a_materialdesign.databinding.FragmentEarthBinding
 
 class EarthFragment : Fragment() {
 
-    val duration = 2000L
+    private val duration = 2000L
     private var isAnimate = false
 
     private var _binding: FragmentEarthBinding? = null

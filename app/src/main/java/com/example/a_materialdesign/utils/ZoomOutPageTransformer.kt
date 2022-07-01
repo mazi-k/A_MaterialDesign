@@ -1,7 +1,6 @@
 package com.example.a_materialdesign.utils
 
 import android.view.View
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 
 private const val MIN_SCALE = 0.85f

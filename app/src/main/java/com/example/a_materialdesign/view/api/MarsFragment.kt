@@ -15,14 +15,14 @@ import com.example.a_materialdesign.databinding.FragmentMarsBinding
 
 class MarsFragment : Fragment() {
 
+    private val duration = 1000L
+    private var isAnimate = false
+
     private var _binding: FragmentMarsBinding? = null
     private val binding: FragmentMarsBinding
         get() {
             return _binding!!
         }
-
-    val duration = 1000L
-    private var isAnimate = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
