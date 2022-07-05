@@ -35,7 +35,7 @@
     </style>
 
     <style name="MyShapeAppearanceSmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
-        <item name="cornerFamily">cut</item>
+        <item name="cornerFamily">rounded</item>
         <item name="cornerSize">0%</item>
     </style>
 
@@ -51,6 +51,12 @@
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">14sp</item>
         <item name="android:letterSpacing">0.0178571429</item>
+    </style>
+
+    <style name="RoundButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">?colorSecondary</item>
+        <item name="android:background">@drawable/background_rounded_button</item>
+        <item name="android:textColor">?colorOnSecondary</item>
     </style>
 
 </resources>

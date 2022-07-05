@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/switch_day"
+        android:id="@+id/switchDay"
         android:text="@string/choose_a_day"
         android:gravity="center"
         style="@style/TextAppearance.AppCompat.Subhead"
@@ -30,31 +30,28 @@
         app:layout_constraintTop_toBottomOf="@id/title"/>
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chip_group"
+        android:id="@+id/chipGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/switch_day"
+        app:layout_constraintTop_toBottomOf="@id/switchDay"
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_today"
-            android:tag="chip_today"
+            android:id="@+id/chipToday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/today"/>
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_yesterday"
-            android:tag="chip_yesterday"
+            android:id="@+id/chipYesterday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/yesterday"/>
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_two_days_ago"
-            android:tag="chip_two_days_ago"
+            android:id="@+id/chipTwoDaysAgo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/_2_days_ago"/>
@@ -68,10 +65,10 @@
         android:padding="@dimen/default_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chip_group"/>
+        app:layout_constraintTop_toBottomOf="@id/chipGroup"/>
 
     <TextView
-        android:id="@+id/switch_subtitle"
+        android:id="@+id/switchSubtitle"
         android:text="@string/switch_theme"
         android:gravity="center"
         style="@style/TextAppearance.AppCompat.Subhead"
@@ -82,38 +79,47 @@
         app:layout_constraintTop_toBottomOf="@id/line"/>
 
     <RadioGroup
-        android:id="@+id/theme_radio_group"
+        android:id="@+id/themeRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/switch_subtitle">
+        app:layout_constraintTop_toBottomOf="@id/switchSubtitle">
 
         <RadioButton
-            android:id="@+id/gray_theme_radio_button"
+            android:id="@+id/grayThemeRadioButton"
             android:text="@string/gray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <RadioButton
-            android:id="@+id/blue_theme_radio_button"
+            android:id="@+id/blueThemeRadioButton"
             android:text="@string/blue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <RadioButton
-            android:id="@+id/purple_theme_radio_button"
+            android:id="@+id/purpleThemeRadioButton"
             android:text="@string/purple"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <RadioButton
-            android:id="@+id/orange_theme_radio_button"
+            android:id="@+id/orangeThemeRadioButton"
             android:text="@string/orange"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </RadioGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/aboutAppButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/about_app"
+        app:layout_constraintTop_toBottomOf="@id/themeRadioGroup"/>
 
 
 

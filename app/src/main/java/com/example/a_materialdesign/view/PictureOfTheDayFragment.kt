@@ -1,30 +1,31 @@
 package com.example.a_materialdesign.view
 
-import BottomNavigationDrawerFragment
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.view.*
-import android.widget.Toast
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.animation.AnticipateOvershootInterpolator
 import androidx.annotation.RequiresApi
-import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.ChangeBounds
+import androidx.transition.TransitionManager
 import coil.load
 import com.example.a_materialdesign.R
 import com.example.a_materialdesign.databinding.FragmentPictureOfTheDayBinding
-import com.example.a_materialdesign.view.api.ApiActivity
 import com.example.a_materialdesign.viewmodel.AppState
 import com.example.a_materialdesign.viewmodel.PictureOfTheDayViewModel
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import java.time.LocalDate
 
 class PictureOfTheDayFragment : Fragment() {
 
     private var isMain = true
     private var result: Int = 0
+    var flag = false
 
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding: FragmentPictureOfTheDayBinding
@@ -66,36 +67,33 @@ class PictureOfTheDayFragment : Fragment() {
         }
 
         wikiSearch()
-        bottomSheetBehavior()
-
-        binding.lifeHack.bottomSheetLine.setOnClickListener {
-            bottomSheetBehavior()
-        }
+        imageViewAnimate()
     }
 
-    private fun bottomSheetBehavior() {
-        val params =
-            (binding.lifeHack.bottomSheetContainer.layoutParams as CoordinatorLayout.LayoutParams)
-        val behavior = params.behavior as BottomSheetBehavior
-        behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
-        behavior.addBottomSheetCallback(object :
-            BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState) {
-                    /*   BottomSheetBehavior.STATE_DRAGGING -> TODO("not implemented")
-                       BottomSheetBehavior.STATE_COLLAPSED -> TODO("not implemented")
-                       BottomSheetBehavior.STATE_EXPANDED -> TODO("not implemented")
-                       BottomSheetBehavior.STATE_HALF_EXPANDED -> TODO("not implemented")
-                       BottomSheetBehavior.STATE_HIDDEN -> TODO("not implemented")
-                       BottomSheetBehavior.STATE_SETTLING -> TODO("not implemented")*/
-                }
-            }
+    private fun imageViewAnimate() {
+        val constraintSetStart = ConstraintSet()
+        constraintSetStart.clone(binding.root)
 
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                Log.d("@@@", "$slideOffset slideOffset")
+        binding.imageView.setOnClickListener {
+            flag = !flag
+            val changeBounds = ChangeBounds()
+            changeBounds.duration = 1000L
+            changeBounds.interpolator = AnticipateOvershootInterpolator(5.0f)
+            TransitionManager.beginDelayedTransition(binding.root, changeBounds)
+            if(flag){
+                constraintSetStart.connect(R.id.title,
+                    ConstraintSet.END,
+                    R.id.main,
+                    ConstraintSet.END)
+                constraintSetStart.applyTo(binding.root)
+            }else{
+                constraintSetStart.connect(R.id.title,
+                    ConstraintSet.END,
+                    R.id.main,
+                    ConstraintSet.START)
+                constraintSetStart.applyTo(binding.root)
             }
-
-        })
+        }
     }
 
     private fun wikiSearch() {
@@ -107,29 +105,6 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//        inflater.inflate(R.menu.menu_bottom_bar, menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.app_bar_fav -> Toast.makeText(context, "Favourite", Toast.LENGTH_SHORT).show()
-//            R.id.app_bar_settings -> requireActivity().supportFragmentManager
-//                .beginTransaction()
-//                .replace(R.id.container, SettingsFragment.newInstance())
-//                .addToBackStack(null)
-//                .commit()
-//            R.id.app_bar_telescope -> {
-//                startActivity(Intent(requireContext(), ApiActivity::class.java))
-//            }
-//            android.R.id.home -> {
-//                BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager, "")
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
-
     private fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Error -> {
@@ -139,8 +114,7 @@ class PictureOfTheDayFragment : Fragment() {
                 binding.imageView.setImageResource(R.drawable.ic_no_photo_vector)
             }
             is AppState.Success -> {
-                binding.lifeHack.title.text = appState.serverResponseData.title
-                binding.lifeHack.explanation.text = appState.serverResponseData.explanation
+                binding.title.text = appState.serverResponseData.title
                 binding.imageView.load(appState.serverResponseData.url) {
                     // TODO placehilde+error+transform
                 }

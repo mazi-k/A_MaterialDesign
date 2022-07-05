@@ -1,14 +1,15 @@
 package com.example.a_materialdesign.view
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.a_materialdesign.R
 import com.example.a_materialdesign.databinding.ActivityMainBinding
 import com.example.a_materialdesign.utils.Parameters
-import com.example.a_materialdesign.view.api.ApiActivity
+import com.example.a_materialdesign.view.api.ApiFragment
+import com.example.a_materialdesign.view.settings.SettingsFragment
 
 class MainActivity : AppCompatActivity(), SettingsFragment.Controller {
 
@@ -33,8 +34,7 @@ class MainActivity : AppCompatActivity(), SettingsFragment.Controller {
         setupNavigation()
 
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, PictureOfTheDayFragment.newInstance(0)).commit()
+            navigationTo(PictureOfTheDayFragment.newInstance(0))
         }
     }
 
@@ -67,23 +67,30 @@ class MainActivity : AppCompatActivity(), SettingsFragment.Controller {
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.action_bottom_view_home -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, PictureOfTheDayFragment.newInstance(0)).commit()
+                    navigationTo(PictureOfTheDayFragment.newInstance(0))
                     true
                 }
                 R.id.action_bottom_view_settings -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, SettingsFragment.newInstance()).commit()
+                    navigationTo(SettingsFragment.newInstance())
                     true
                 }
                 R.id.action_bottom_view_telescope -> {
-                    startActivity(Intent(this, ApiActivity::class.java))
+                    navigationTo(ApiFragment.newInstance())
                     true
                 }
                 else -> {
                     true
                 }
             }
+        }
+    }
+
+    private fun navigationTo(fragment: Fragment) {
+        val fragmentManager = supportFragmentManager
+        fragmentManager.apply {
+            beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit()
         }
     }
 }

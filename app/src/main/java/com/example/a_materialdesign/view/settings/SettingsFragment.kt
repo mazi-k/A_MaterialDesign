@@ -1,4 +1,4 @@
-package com.example.a_materialdesign.view
+package com.example.a_materialdesign.view.settings
 
 import android.content.Context
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.a_materialdesign.R
 import com.example.a_materialdesign.databinding.SettingsFragmentBinding
 
 class SettingsFragment: Fragment() {
@@ -39,6 +40,15 @@ class SettingsFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         applyChipChoice()
         switchTheme()
+        aboutAppButton()
+    }
+
+    private fun aboutAppButton() {
+        binding.aboutAppButton.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.container, AboutAppFragment()).commit()
+        }
     }
 
     private fun switchTheme() {
