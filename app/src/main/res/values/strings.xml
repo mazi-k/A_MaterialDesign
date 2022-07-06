@@ -115,4 +115,5 @@
          "when a user tries to pick up one of cards.\n\n"
      </string>
     <string name="about_app">About app</string>
+    <string name="to_recycle_view">to recycle view</string>
 </resources>

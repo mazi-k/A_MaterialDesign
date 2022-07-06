@@ -1,0 +1,118 @@
+package com.example.a_materialdesign.view.settings.recycler
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
+import com.example.a_materialdesign.R
+import com.example.a_materialdesign.databinding.FragmentRecyclerItemEarthBinding
+import com.example.a_materialdesign.databinding.FragmentRecyclerItemHeaderBinding
+import com.example.a_materialdesign.databinding.FragmentRecyclerItemMarsBinding
+
+
+const val TYPE_EARTH = 0
+const val TYPE_MARS = 1
+const val TYPE_HEADER = 2
+
+class RecyclerFragmentAdapter() :
+    RecyclerView.Adapter<RecyclerFragmentAdapter.BaseViewHolder>(),
+    ItemTouchHelperAdapter {
+
+    private var dataList: MutableList<Pair<Data,Boolean>> = mutableListOf()
+
+    fun setData(newData: MutableList<Pair<Data,Boolean>>) {
+        this.dataList = newData
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return dataList[position].first.type
+    }
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): BaseViewHolder {
+        return when (viewType) {
+            TYPE_EARTH -> {
+                val binding =
+                    FragmentRecyclerItemEarthBinding.inflate(LayoutInflater.from(parent.context))
+                EarthViewHolder(binding)
+            }
+            TYPE_MARS -> {
+                val binding =
+                    FragmentRecyclerItemMarsBinding.inflate(LayoutInflater.from(parent.context))
+                MarsViewHolder(binding.root)
+            }
+            TYPE_HEADER -> {
+                val binding =
+                    FragmentRecyclerItemHeaderBinding.inflate(LayoutInflater.from(parent.context))
+                HeaderViewHolder(binding)
+            }
+            else -> {
+                val binding =
+                    FragmentRecyclerItemMarsBinding.inflate(LayoutInflater.from(parent.context))
+                MarsViewHolder(binding.root)
+            }
+        }
+    }
+
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        holder.bind(dataList[position])
+    }
+
+    override fun getItemCount(): Int {
+        return dataList.size
+    }
+
+
+    class EarthViewHolder(val binding: FragmentRecyclerItemEarthBinding) :
+        BaseViewHolder(binding.root) {
+        override fun bind(data: Pair<Data,Boolean>) {
+            binding.name.text = data.first.name
+        }
+    }
+
+    class HeaderViewHolder(val binding: FragmentRecyclerItemHeaderBinding) :
+        BaseViewHolder(binding.root) {
+        override fun bind(data: Pair<Data,Boolean>) {
+            binding.name.text = data.first.name
+        }
+    }
+
+    class MarsViewHolder(view: View) : BaseViewHolder(view), ItemTouchHelperViewHolder {
+        override fun bind(data: Pair<Data,Boolean>) {
+            val binding = FragmentRecyclerItemMarsBinding.bind(itemView)
+            binding.name.text = data.first.name
+        }
+
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(
+                ContextCompat.getColor(
+                    itemView.context,
+                    R.color.colorAccent40Alfa
+                )
+            )
+        }
+
+        override fun onItemClear() {
+            itemView.setBackgroundColor(0)
+        }
+    }
+
+    abstract class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        abstract fun bind(data: Pair<Data,Boolean>)
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        dataList.removeAt(fromPosition).apply {
+            dataList.add(toPosition , this)
+        }
+        notifyItemMoved(fromPosition,toPosition)
+    }
+
+    override fun onItemDismiss(position: Int) {
+        dataList.removeAt(position)
+        notifyItemRemoved(position)
+    }
+}

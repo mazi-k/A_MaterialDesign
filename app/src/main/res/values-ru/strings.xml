@@ -26,4 +26,6 @@
     <string name="system">Система</string>
     <string name="telescope">Телескоп</string>
     <string name="home">Дом</string>
+    <string name="about_app">О приложении</string>
+    <string name="to_recycle_view">К списку</string>
 </resources>
