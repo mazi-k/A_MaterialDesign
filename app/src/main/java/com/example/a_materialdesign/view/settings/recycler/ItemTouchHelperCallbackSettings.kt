@@ -40,15 +40,18 @@ ItemTouchHelper.Callback() {
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
         if (actionState != ItemTouchHelper.ACTION_STATE_IDLE) {
             if (viewHolder is RecyclerFragmentAdapter.MarsViewHolder)
-                (viewHolder as RecyclerFragmentAdapter.MarsViewHolder).onItemSelected()
+                viewHolder.onItemSelected()
+            if (viewHolder is RecyclerFragmentAdapter.EarthViewHolder)
+                viewHolder.onItemSelected()
         }
         super.onSelectedChanged(viewHolder, actionState)
     }
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
         if (viewHolder is RecyclerFragmentAdapter.MarsViewHolder)
-            (viewHolder as RecyclerFragmentAdapter.MarsViewHolder).onItemClear()
+            viewHolder.onItemClear()
+        if (viewHolder is RecyclerFragmentAdapter.EarthViewHolder)
+            viewHolder.onItemClear()
         super.clearView(recyclerView, viewHolder)
     }
-
 }

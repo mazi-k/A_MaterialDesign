@@ -37,7 +37,7 @@ class RecyclerFragmentAdapter() :
             TYPE_EARTH -> {
                 val binding =
                     FragmentRecyclerItemEarthBinding.inflate(LayoutInflater.from(parent.context))
-                EarthViewHolder(binding)
+                EarthViewHolder(binding.root)
             }
             TYPE_MARS -> {
                 val binding =
@@ -65,14 +65,6 @@ class RecyclerFragmentAdapter() :
         return dataList.size
     }
 
-
-    class EarthViewHolder(val binding: FragmentRecyclerItemEarthBinding) :
-        BaseViewHolder(binding.root) {
-        override fun bind(data: Pair<Data,Boolean>) {
-            binding.name.text = data.first.name
-        }
-    }
-
     class HeaderViewHolder(val binding: FragmentRecyclerItemHeaderBinding) :
         BaseViewHolder(binding.root) {
         override fun bind(data: Pair<Data,Boolean>) {
@@ -80,11 +72,22 @@ class RecyclerFragmentAdapter() :
         }
     }
 
-    class MarsViewHolder(view: View) : BaseViewHolder(view), ItemTouchHelperViewHolder {
+    class EarthViewHolder(view: View) : BaseViewHolder(view) {
+        override fun bind(data: Pair<Data,Boolean>) {
+            val binding = FragmentRecyclerItemEarthBinding.bind(itemView)
+            binding.name.text = data.first.name
+        }
+    }
+
+    class MarsViewHolder(view: View) : BaseViewHolder(view) {
         override fun bind(data: Pair<Data,Boolean>) {
             val binding = FragmentRecyclerItemMarsBinding.bind(itemView)
             binding.name.text = data.first.name
         }
+    }
+
+    abstract class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view), ItemTouchHelperViewHolder {
+        abstract fun bind(data: Pair<Data,Boolean>)
 
         override fun onItemSelected() {
             itemView.setBackgroundColor(
@@ -100,19 +103,21 @@ class RecyclerFragmentAdapter() :
         }
     }
 
-    abstract class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        abstract fun bind(data: Pair<Data,Boolean>)
-    }
-
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
-        dataList.removeAt(fromPosition).apply {
-            dataList.add(toPosition , this)
+        if (fromPosition != 0 && toPosition != 0) {
+            dataList.removeAt(fromPosition).apply {
+                dataList.add(toPosition , this)
+            }
+            notifyItemMoved(fromPosition,toPosition)
         }
-        notifyItemMoved(fromPosition,toPosition)
     }
 
     override fun onItemDismiss(position: Int) {
-        dataList.removeAt(position)
-        notifyItemRemoved(position)
+        if (position != 0) {
+            dataList.removeAt(position)
+            notifyItemRemoved(position)
+        } else {
+            notifyItemChanged(position)
+        }
     }
 }
