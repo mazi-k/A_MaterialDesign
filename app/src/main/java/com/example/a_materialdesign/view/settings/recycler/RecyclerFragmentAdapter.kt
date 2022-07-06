@@ -19,9 +19,9 @@ class RecyclerFragmentAdapter :
     RecyclerView.Adapter<RecyclerFragmentAdapter.BaseViewHolder>(),
     ItemTouchHelperAdapter {
 
-    private var dataList: MutableList<Pair<Data,Boolean>> = mutableListOf()
+    private var dataList: ArrayList<Pair<Data,Boolean>> = arrayListOf()
 
-    fun setData(newData: MutableList<Pair<Data,Boolean>>) {
+    fun setData(newData: ArrayList<Pair<Data,Boolean>>) {
         this.dataList = newData
     }
 
