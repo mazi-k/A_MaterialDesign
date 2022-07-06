@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.a_materialdesign.databinding.FragmentRecyclerViewBinding
 
@@ -15,6 +16,10 @@ class RecyclerFragment : Fragment() {
         get() {
             return _binding!!
         }
+
+    val viewModel: RecycleViewModel by lazy {
+        ViewModelProvider(this).get(RecycleViewModel::class.java)
+    }
 
     private val adapter = RecyclerFragmentAdapter()
 
@@ -32,21 +37,12 @@ class RecyclerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.recyclerView.adapter = adapter
+        val data = viewModel.getData()
 
-        val data = arrayListOf(
-            Pair(Data(1, "Earth", type = TYPE_EARTH), false),
-            Pair(Data(2, "Earth", type = TYPE_EARTH), false),
-            Pair(Data(3, "Mars", "", type = TYPE_MARS), false),
-            Pair(Data(4, "Earth", type = TYPE_EARTH), false),
-            Pair(Data(5, "Earth", type = TYPE_EARTH), false),
-            Pair(Data(6, "Earth", type = TYPE_EARTH), false),
-            Pair(Data(7, "Mars", null, type = TYPE_MARS), false)
-        )
         data.add(0, Pair(Data(0, "Заголовок", type = TYPE_HEADER), false))
 
         adapter.setData(data)
 
         ItemTouchHelper(ItemTouchHelperCallbackSettings(adapter)).attachToRecyclerView(binding.recyclerView)
-
     }
 }

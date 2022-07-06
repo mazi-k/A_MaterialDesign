@@ -15,7 +15,7 @@ const val TYPE_EARTH = 0
 const val TYPE_MARS = 1
 const val TYPE_HEADER = 2
 
-class RecyclerFragmentAdapter() :
+class RecyclerFragmentAdapter :
     RecyclerView.Adapter<RecyclerFragmentAdapter.BaseViewHolder>(),
     ItemTouchHelperAdapter {
 
