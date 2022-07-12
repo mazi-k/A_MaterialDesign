@@ -89,6 +89,11 @@ class MainActivity : AppCompatActivity(), SettingsFragment.Controller {
         val fragmentManager = supportFragmentManager
         fragmentManager.apply {
             beginTransaction()
+                .setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out)
                 .replace(R.id.container, fragment)
                 .commit()
         }

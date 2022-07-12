@@ -112,6 +112,16 @@
 
     </RadioGroup>
 
+    <ImageView
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/line"
+        android:padding="@dimen/default_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/themeRadioGroup"/>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/aboutAppButton"
         android:layout_width="wrap_content"
@@ -119,7 +129,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/about_app"
-        app:layout_constraintTop_toBottomOf="@id/themeRadioGroup"/>
+        app:layout_constraintTop_toBottomOf="@id/line2"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/toRecyclerViewButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/to_recycle_view"
+        app:layout_constraintTop_toBottomOf="@id/aboutAppButton"/>
 
 
 

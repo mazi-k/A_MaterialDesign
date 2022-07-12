@@ -8,10 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.a_materialdesign.R
 import com.example.a_materialdesign.databinding.SettingsFragmentBinding
+import com.example.a_materialdesign.view.settings.recycler.RecyclerFragment
 
-class SettingsFragment: Fragment() {
+class SettingsFragment : Fragment() {
 
-    private var _binding: SettingsFragmentBinding ? = null
+    private var _binding: SettingsFragmentBinding? = null
     private val binding: SettingsFragmentBinding
         get() {
             return _binding!!
@@ -41,11 +42,32 @@ class SettingsFragment: Fragment() {
         applyChipChoice()
         switchTheme()
         aboutAppButton()
+        toRecyclerViewButton()
+    }
+
+    private fun toRecyclerViewButton() {
+        binding.toRecyclerViewButton.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out
+                )
+                .addToBackStack(null)
+                .replace(R.id.container, RecyclerFragment()).commit()
+        }
     }
 
     private fun aboutAppButton() {
         binding.aboutAppButton.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out
+                )
                 .addToBackStack(null)
                 .replace(R.id.container, AboutAppFragment()).commit()
         }
@@ -69,7 +91,7 @@ class SettingsFragment: Fragment() {
         }
     }
 
-    private fun applyChipChoice(){
+    private fun applyChipChoice() {
         binding.chipToday.setOnClickListener {
             controller!!.saveResult(0)
         }
@@ -91,7 +113,7 @@ class SettingsFragment: Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-           SettingsFragment()
+            SettingsFragment()
     }
 
     interface Controller {
