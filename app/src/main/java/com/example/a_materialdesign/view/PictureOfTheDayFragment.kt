@@ -1,6 +1,7 @@
 package com.example.a_materialdesign.view
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -115,6 +116,9 @@ class PictureOfTheDayFragment : Fragment() {
             }
             is AppState.Success -> {
                 binding.title.text = appState.serverResponseData.title
+                binding.title.typeface = Typeface.createFromAsset(
+                    requireActivity().assets,
+                    "new_font.otf")
                 binding.imageView.load(appState.serverResponseData.url) {
                     // TODO placehilde+error+transform
                 }
